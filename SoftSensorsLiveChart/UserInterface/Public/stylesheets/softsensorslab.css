@@ -1,0 +1,169 @@
+.move_icon{
+    position: absolute;
+    font-size: 50px;
+    top: 50px;
+    margin: 0;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.move_left{
+    left: 3px;
+}
+
+.move_right{
+    right:3px;
+}
+
+
+
+
+#chart_row.modifiable .movable:hover .move_icon{
+display: block;
+}
+
+
+.move_icon{
+display: none;
+}
+.move_icon:hover:not([disabled]){
+    color: #0ea432;
+    cursor: pointer ;
+}
+
+
+.icon_left_border{
+    border-left-style: solid;
+    border-left-width: 1px;
+    padding-left: 5px;
+    border-left-color: #252525;
+}
+
+.icon_right_border{
+    border-right-style: solid;
+    border-right-width: 1px;
+    padding-right: 5px;
+    border-right-color: #252525;
+}
+
+#connectionIcon.connect{
+    color:lightgreen;
+}
+
+#connectionIcon.disconnect{
+    color:red;
+}
+
+.popover-body{
+    text-align: center;
+}
+/*Switch*/
+.toogleswitch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toogleswitch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toogleslider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.toogleslider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .toogleslider {
+    background-color: #2196F3;
+}
+
+input:focus + .toogleslider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .toogleslider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.toogleslider.round {
+    border-radius: 34px;
+}
+
+.toogleslider.round:before {
+    border-radius: 50%;
+}
+
+.heatmap_div .square {
+    position: relative;
+    width: 50%;
+    background: black;
+    display: inline-block;
+}
+
+.heatmap_div .square:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+.heatmap_div .mat_line{
+    line-height: 0px;
+    width: 100%;
+}
+
+.heatmap_div .hm_legend{
+    display: inline-block;
+    min-width: 40px;
+    width: 50px;
+    text-align: center;
+    color: white;
+    background-color: black;
+}
+
+.heatmap_div .hm_title{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.device_information td{
+    color:black;
+    font-size: 16px;
+    text-align: left !important;
+}
+
+.system_info_card div[class^='col']{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+

@@ -1,0 +1,28 @@
+{
+  "name": "fogetex",
+  "version": "1.3.0",
+  "description": "",
+  "main": "Server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadirozlem/SoftSensorsLiveChart.git"
+  },
+  "author": "Kadir Ozlem",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kadirozlem/SoftSensorsLiveChart/issues"
+  },
+  "homepage": "https://github.com/kadirozlem/SoftSensorsLiveChart#readme",
+  "dependencies": {
+    "axios": "^1.3.4",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "microtime": "^3.1.1",
+    "morgan": "^1.10.0",
+    "network": "^0.6.1",
+    "socket.io": "^4.6.1",
+    "socket.io-client": "^4.6.1",
+    "winston": "^3.8.2"
+  }
+}

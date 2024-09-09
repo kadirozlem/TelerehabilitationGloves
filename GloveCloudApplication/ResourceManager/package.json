@@ -1,0 +1,27 @@
+{
+  "name": "fogetex_resource_manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadirozlem/FogETexResourceManager.git"
+  },
+  "keywords": [
+    "resource_manager"
+  ],
+  "author": "Kadir Ozlem",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kadirozlem/FogETexResourceManager/issues"
+  },
+  "homepage": "https://github.com/kadirozlem/FogETexResourceManager#readme",
+  "dependencies": {
+    "microtime": "^3.1.1",
+    "socket.io": "^4.6.1",
+    "socket.io-client": "^4.6.1"
+  }
+}

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+<body>
+
+<%- include('./partials/sidebar') %>
+<%- include('./partials/header') %>
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Hello, <span>Welcome Here</span></h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+                <div class="col-lg-4 p-l-0 title-margin-left">
+                    <div class="page-header">
+                        <div class="page-title">
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+            </div>
+            <!-- /# row -->
+            <section id="main-content">
+
+                <!-- /# row -->
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm12 system_info_card">
+                        <div class="row">
+                            <!--  column -->
+                            <div class="col-lg-4">
+                                <div class="card alert">
+                                    <div class="card-title">
+                                        <h4><i class="fa fa-area-chart"></i> Thumb Finger</h4>
+                                    </div>
+                                    <div class="thumb-chart">
+                                        <!--                                        <div id="cpu-load" class="cpu-load"></div>-->
+                                        <canvas id="thumb_finger"></canvas>
+
+                                    </div>
+                                </div>
+                                <!-- /# card -->
+                            </div>
+                            <!-- /# column -->
+                            <!--  column -->
+                            <div class="col-lg-4">
+                                <div class="card alert">
+                                    <div class="card-title">
+                                        <h4><i class="fa fa-area-chart"></i> Index Finger</h4>
+                                    </div>
+                                    <div class="index-chart">
+                                        <!--                                        <div id="cpu-load" class="cpu-load"></div>-->
+                                        <canvas id="index_finger"></canvas>
+
+                                    </div>
+                                </div>
+                                <!-- /# card -->
+                            </div>
+                            <!-- /# column -->
+                            <!--  column -->
+                            <div class="col-lg-4">
+                                <div class="card alert">
+                                    <div class="card-title">
+                                        <h4><i class="fa fa-area-chart"></i> Middle Finger</h4>
+                                    </div>
+                                    <div class="middle-chart">
+                                        <!--                                        <div id="cpu-load" class="cpu-load"></div>-->
+                                        <canvas id="middle_finger"></canvas>
+
+                                    </div>
+                                </div>
+                                <!-- /# card -->
+                            </div>
+                            <!-- /# column -->
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-4">
+                                <div class="card alert">
+                                    <div class="card-title">
+                                        <h4><i class="fa fa-area-chart"></i> Ring Finger</h4>
+                                    </div>
+                                    <div class="ring-chart">
+                                        <!--                                        <div id="cpu-load" class="cpu-load"></div>-->
+                                        <canvas id="ring_finger"></canvas>
+
+                                    </div>
+                                </div>
+                                <!-- /# card -->
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card alert">
+                                    <div class="card-title">
+                                        <h4><i class="fa fa-area-chart"></i> Pinkie Finger</h4>
+                                    </div>
+                                    <div class="pinkie-chart">
+                                        <!--                                        <div id="cpu-load" class="cpu-load"></div>-->
+                                        <canvas id="pinkie_finger"></canvas>
+
+                                    </div>
+                                </div>
+                                <!-- /# card -->
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="row" id="website_footer">
+                    <div class="col-lg-12">
+                        <div class="footer">
+                            <p>2023 © Soft Sensors Lab. - <a href="https://softsensorslab.itu.edu.tr" target="_blank">softsensorslab.itu.edu.tr</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+<%- include('./partials/footer') %>
+
+<div id="loadingDiv" class="cssload-container">
+    <div class="cssload-item cssload-ventilator"></div>
+</div>
+
+<%- include('./partials/scripts') %>
+
+<script>
+    $(window).resize(function () {
+        var calc_height = $(window).height() - $('#website_footer').height() - $('#page_title').height() - $('#header_container').height()
+        $("#chart_row").css('min-height', calc_height);
+    });
+
+    var calc_height = $(window).height() - $('#website_footer').height() - $('#page_title').height() - $('#header_container').height();
+    $("#chart_row").css('min-height', calc_height);
+
+</script>
+<!--Script Area-->
+<script>
+
+
+    ChartObject = function (canvasId, title, datasize = 102, labels = null, max_y=100) {
+        this.canvasId = canvasId;
+        this.title = title;
+        this.datasize = datasize;
+        this.labels = labels
+        this.min_y = 0;
+        this.max_y = max_y;
+
+
+        this.Initialize = function () {
+            this.ctx = document.getElementById(this.canvasId);
+            this.chart = new Chart(this.ctx, {
+                type: 'line',
+                data: {
+                    labels: this.labels,
+                    datasets: this.datasets
+                },
+                options: {
+                    animation: {
+                        duration: 0
+                    },
+                    responsive: true
+                    ,
+                    plugins:{
+                        legend:{
+                            display:false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            mix: 0,
+                            max: 100,
+                            ticks: {
+                                autoSkip: true,
+                                maxTicksLimit: 21
+                            }
+                        },
+                        y: {
+                            suggestedMax: this.max_y,
+                           
+
+                        }
+                    }
+                }
+            });
+        }
+
+        this.createDataSet = function (dataset_titles) {
+            if (!this.labels) {
+                this.labels = [];
+                for (let i = 0; i < this.datasize; i++) {
+                    this.labels.push(i);
+                }
+            }
+            this.datasets = dataset_titles.map(item => {
+                return {
+                    label: item,
+                    data: [],
+                    fill: false,
+                    tension: 0.5
+                }
+            });
+        }
+
+        this.AddData = function (values) {
+            values.forEach((item, index) => {
+                const arr = this.datasets[index].data;
+                arr.push(item);
+                if (arr.length > this.datasize - 1) {
+                    arr.shift();
+                }
+            });
+            this.chart.update()
+        }
+
+        this.AddBulkData = function (values) {
+            values.forEach((item, index) => {
+                const arr = this.datasets[index].data;
+                arr.push(...item);
+                if (arr.length > this.datasize) {
+                    this.datasets[index].data = arr.slice(arr.length - arr.datasize, arr.length);
+                }
+            });
+            this.chart.update()
+        }
+
+        this.ChangeStatusColor=function (color){
+            $('#'+this.canvasId).parent().parent().children('.card-title').css('background-color',color);
+        }
+    }
+    ThumbFinger = new ChartObject('thumb_finger', 'Thumb Finger');
+    ThumbFinger.createDataSet(['Thumb Finger']);
+    ThumbFinger.Initialize();
+
+    IndexFinger = new ChartObject('index_finger', 'Index Finger');
+    IndexFinger.createDataSet(['Index Finger']);
+    IndexFinger.Initialize();
+
+    MiddleFinger = new ChartObject('middle_finger', 'Middle Finger');
+    MiddleFinger.createDataSet(['Middle Finger']);
+    MiddleFinger.Initialize();
+
+    RingFinger = new ChartObject('ring_finger', 'Ring Finger');
+    RingFinger.createDataSet(['Ring Finger']);
+    RingFinger.Initialize();
+
+    PinkieFinger = new ChartObject('pinkie_finger', 'Pinkie Finger');
+    PinkieFinger.createDataSet(['Pinkie Finger']);
+    PinkieFinger.Initialize();
+
+    MemoryUsage = new ChartObject('memory-usage', 'Memory Usage');
+    MemoryUsage.createDataSet(['Memory Usage']);
+    MemoryUsage.Initialize();
+
+
+
+</script>
+
+<script>
+
+    Update_Index = 0;
+    Finger_Status={Opening: '0', Opened: '1',Closing:'2', Closed: '3', Calibration:'9'}
+    Status_Color={}
+    Status_Color[Finger_Status.Opening]='yellow'
+    Status_Color[Finger_Status.Opened]='greenyellow'
+    Status_Color[Finger_Status.Closing]='orange'
+    Status_Color[Finger_Status.Closed]='orangered'
+    Status_Color[Finger_Status.Calibration]='white'
+
+    Current_Status = [Finger_Status.Calibration,Finger_Status.Calibration,Finger_Status.Calibration,Finger_Status.Calibration,Finger_Status.Calibration,]
+
+    socket = io('/', {
+        query: {
+            DeviceType: "<%= UserType %>",
+            Directory: "<%= Directory %>"
+        }
+    });
+    socket.on('connect', function () {
+        console.log('connected');
+        $('#connectionIcon').removeClass('disconnect').addClass('connect');
+        $('#connectionIcon').data('content', 'Device is connected!').attr('data-content', 'Device connected');
+        //socket.emit('control', new SocketCodes.InitialConfiguration([]));
+    });
+    //  socket = io('https://'+window.location.hostname+':'+window.location.port);
+    // socket.on("device", function (data) {
+    //     if (data) {
+    //         $("#device").html("Connected");
+    //     } else {
+    //         $("#device").html("Disconnected");
+    //     }
+    // });
+
+    socket.on('disconnect', function () {
+        $('#connectionIcon').removeClass('connect').addClass('disconnect');
+        $('#connectionIcon').data('content', 'Device is disconnected!').attr('data-content', 'Device is disconnected');
+
+    });
+
+    socket.on('resource_info', function (info) {
+        test_info = info;
+        //console.log(info);
+        //CPU Load Graph
+        CPULoad.AddData([info.cpu_percentage.total.usage]);
+        RequestResponseChart.AddData([info.user_package_total.request, info.user_package_total.response]);
+        BandwidthChart.AddData([info.network_bandwidth.TX.Bytes/10, info.network_bandwidth.RX.Bytes/10])
+        Update_Index++;
+        //CPU Core Infos
+        if (Update_Index % 2 == 0) {
+            for (let i = 0; i < info.cpu_percentage.cores.length; i++) {
+                Core_CircleBars[i].Change(info.cpu_percentage.cores[i].usage / 100)
+            }
+        }
+        //Process Time
+        $('#process_time_card .stat-digit').html(SecondToTime(info.process_uptime))
+        ChangeProgressBar('#process_time_card .progress-bar', (info.process_uptime % 60) / 60);
+
+        //System Time
+        $('#system_time_card .stat-digit').html(SecondToTime(info.system_uptime))
+        ChangeProgressBar('#system_time_card .progress-bar', (info.system_uptime % 60) / 60);
+
+        //Memory
+        const memory_usage = parseInt(100 * (info.totalmem - info.freemem) / info.totalmem)
+        $('#ram_card .stat-digit').html(memory_usage + '%')
+        ChangeProgressBar('#ram_card .progress-bar', memory_usage/100);
+        MemoryUsage.AddData([memory_usage]);
+        //circleprogress.Change(info.cpu_percentage.total.usage);
+    });
+
+
+
+
+
+
+</script>
+
+<script>
+    (function ($) {
+        "use strict";
+        let buffer = [[],[],[],[],[]]
+        let buffer_size = 5;
+        socket.on("sensor", function (data) {
+            let values = data.split(';');
+            if(values.length == 5){
+                for(var i=0; i<5; i++) {
+                    buffer[i].push(parseFloat(values[i]))
+                }
+
+                if(buffer[0].length>=buffer_size) {
+                    ThumbFinger.AddData([parseFloat(values[0])]);
+                    IndexFinger.AddData([parseFloat(values[1])]);
+                    MiddleFinger.AddData([parseFloat(values[2])]);
+                    RingFinger.AddData([parseFloat(values[3])]);
+                    PinkieFinger.AddData([parseFloat(values[4])]);
+                    buffer = [[],[],[],[],[]]
+                }
+
+            }
+
+            //AddSensorsData(data);
+        });
+
+        socket.on('finger_status',function (data){
+           let status = data.split(';');
+           console.log(data)
+           if(status.length==5){
+               ThumbFinger.ChangeStatusColor(Status_Color[status[0]]);
+               IndexFinger.ChangeStatusColor(Status_Color[status[1]]);
+               MiddleFinger.ChangeStatusColor(Status_Color[status[2]]);
+               RingFinger.ChangeStatusColor(Status_Color[status[3]]);
+               PinkieFinger.ChangeStatusColor(Status_Color[status[4]]);
+           }
+        });
+
+
+    }(jQuery));
+</script>
+
+<!--End Script Area-->
+
+</body>
+
+</html>
